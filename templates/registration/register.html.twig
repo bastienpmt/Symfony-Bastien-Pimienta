@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+<div class="container p-5 cardDesign my-4">
+    <h3>Enregistrer un user</h3>
+<hr class="bg-light w-25 my-2">
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.nom) }}
+        {{ form_row(registrationForm.prenom) }}
+        {{ form_row(registrationForm.section) }}
+        {{ form_row(registrationForm.photo) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn btn-dark">Ajouter</button>
+        <a class="btn btn-dark ml-2" href="{{ path('employe') }}">Home</a>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

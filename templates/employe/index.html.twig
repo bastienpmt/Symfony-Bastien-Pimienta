@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}home{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+<div class="container-fluid">
+<div class="d-flex">
+                <a class="btn btn-dark m-3" href="{{ path('employe_section',{'section':'Informatique'}) }}">Informaticiens</a>
+                <a class="btn btn-dark m-3" href="{{ path('employe_section',{'section':'Comptabilité'}) }}">Comptables</a>
+                <a class="btn btn-dark m-3" href="{{ path('employe_section',{'section':'Direction'}) }}">Direction</a>
+                <a class="btn btn-dark m-3" href="{{ path('employe_section',{'section':'Recrutement'}) }}">Recrutement</a>
+                <a class="btn btn-danger m-3" href="{{ path('employe') }}">Réinitialiser</a>
+</div>
+
+    <div class="row w-100">
+        {% for employe in employes %}
+        <div class="col-lg-4 col-sm-12 p-4">
+         <div class="p-2 cardDesign">
+                <h2>{{ employe.Nom }} {{ employe.Prenom }}</h2>
+                {% if employe.Section == 'Informatique' %}
+                <h4 class="text-success">{{ employe.Section }}</h4>
+                {% endif %}
+                {% if employe.Section == 'Comptabilité' %}
+                <h4 class="text-primary">{{ employe.Section }}</h4>
+                {% endif %}
+                {% if employe.Section == 'Direction' %}
+                <h4 class="text-alert">{{ employe.Section }}</h4>
+                {% endif %}
+                   {% if employe.Section == 'Recrutement' %}
+                <h4 class="text-muted">{{ employe.Section }}</h4>
+                {% endif %}
+                {% if employe.photo|length >0 %}
+                <img src="{{ asset('uploads/'~ employe.photo ~'') }}">
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-danger mt-4" href="{{ path('delete_employe', {'employe': employe.id}) }}">Delete</a>
+                {% endif %}
+            </ul>
+         </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
